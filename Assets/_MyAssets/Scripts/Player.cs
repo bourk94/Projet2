@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
     //Attribut
-    [SerializeField] private float _vitesse = 10;
-    private Vector3 _positionDepart = new Vector3(-13f, 0.51f, -13f);
+    [SerializeField] private float _vitesse = 15;
+    private Vector3 _positionDepart = new Vector3(-31f, 0.5f, -31f);
 
     //Méthodes privées
     private void Start()
@@ -30,4 +31,5 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
         transform.Translate(direction * Time.deltaTime * _vitesse);
     }
+
 }
