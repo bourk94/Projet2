@@ -12,10 +12,10 @@ public class Player : MonoBehaviour
     private GestionFin _gestionFin;
     private Rigidbody _rb;
 
-    //Méthodes privées
+    //Mï¿½thodes privï¿½es
     private void Start()
     {
-        //Postion de départ du joueur
+        //Postion de dï¿½part du joueur
         this.transform.position = _positionDepart;
         _rb = GetComponent<Rigidbody>();
 
@@ -30,11 +30,12 @@ public class Player : MonoBehaviour
     {
         float positionX = Input.GetAxis("Horizontal");
         float positionZ = Input.GetAxis("Vertical");
+        
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
         _rb.velocity = direction * Time.fixedDeltaTime * _vitesse;
     }
 
-    // Méthode publiques
+    // Mï¿½thode publiques
     public void FinPartie()
     {
         this.gameObject.SetActive(false);
