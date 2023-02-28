@@ -7,21 +7,23 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     //Attribut
-    [SerializeField] private float _vitesse = 15;
+    [SerializeField] private float _vitesse = 600;
     private Vector3 _positionDepart = new Vector3(-31f, 0.5f, -31f);
+    private GestionFin _gestionFin;
+    private Rigidbody _rb;
 
     //Méthodes privées
     private void Start()
     {
         //Postion de départ du joueur
         this.transform.position = _positionDepart;
+        _rb = GetComponent<Rigidbody>();
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         MouvementsJoueur();
-
     }
 
     private void MouvementsJoueur()
@@ -29,7 +31,13 @@ public class Player : MonoBehaviour
         float positionX = Input.GetAxis("Horizontal");
         float positionZ = Input.GetAxis("Vertical");
         Vector3 direction = new Vector3(positionX, 0f, positionZ);
-        transform.Translate(direction * Time.deltaTime * _vitesse);
+        _rb.velocity = direction * Time.fixedDeltaTime * _vitesse;
+    }
+
+    // Méthode publiques
+    public void FinPartie()
+    {
+        this.gameObject.SetActive(false);
     }
 
 }

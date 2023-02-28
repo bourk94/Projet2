@@ -17,7 +17,8 @@ public class GestionCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_toucher && collision.gameObject.tag != "Player") return; 
+        if (!_toucher && collision.gameObject.tag != "Player") 
+            return; 
         
         gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         _gameManager.AugmenterPointage();
