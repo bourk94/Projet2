@@ -17,11 +17,13 @@ public class GestionCollision : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_toucher && collision.gameObject.tag != "Player") 
-            return; 
+        if (!_toucher && collision.gameObject.tag == "Player")
+        {
+            gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
+            _gameManager.AugmenterPointage();
+            _toucher = true;
+        }
         
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-        _gameManager.AugmenterPointage();
-        _toucher = true;
+        
     }
 }

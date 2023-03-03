@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GestionFin : MonoBehaviour
 {
@@ -17,12 +18,22 @@ public class GestionFin : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (!_toucher && collision.gameObject.tag != "Player") 
-            return;
+        int indexScene = SceneManager.GetActiveScene().buildIndex;
+        if (!_toucher && collision.gameObject.tag == "Player")
+        {
+            gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
+            _player.FinPartie();
+            _toucher = true;
 
-        gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-        _gameManager.TerminerPartie();    
-        _toucher = true;
-        _player.FinPartie();
+            if (indexScene == 1)
+            {
+                _gameManager.TerminerPartie(); 
+            }
+            else
+            {
+                SceneManager.LoadScene(indexScene + 1);
+            }
+
+        }      
     }
 }

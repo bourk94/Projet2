@@ -7,11 +7,20 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     // Attributs
-    private int _pointage;
+    private int _accrochage;
 
+    private void Awake()
+    {
+        int nbGestionJeu = FindObjectsOfType<GameManager>().Length;
+        if (nbGestionJeu > 0)
+        {
+            Destroy(gameObject);
+        }
+
+    }
     private void Start()
     {
-        _pointage = 0;
+        _accrochage = 0;
         Instructions();
     }
 
@@ -25,14 +34,14 @@ public class GameManager : MonoBehaviour
     // Méthode public
     public void AugmenterPointage()
     {
-        _pointage++;
-        Debug.Log("Nombres d'accrochages : " + _pointage);
+        _accrochage++;
+        Debug.Log("Nombres d'accrochages : " + _accrochage);
     }
 
     public void TerminerPartie()
     {
-        Debug.Log("Temps de la partie : " + Time.time);
-        Debug.Log("Nombre d'obstacles touchés" + _pointage);
-        Debug.Log("Score : " + Math.Round(Time.time) + _pointage);
+        Debug.Log("Temps de la partie : " + Time.time.ToString("f2"));
+        Debug.Log("Nombre d'obstacles touchés" + _accrochage);
+        Debug.Log("Score : " + Time.time.ToString("f2") + _accrochage);
     }
 }

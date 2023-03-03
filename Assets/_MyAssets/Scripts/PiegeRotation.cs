@@ -5,16 +5,10 @@ using UnityEngine;
 public class PiegeRotation : MonoBehaviour
 {
     // Attributs
-    [SerializeField] private float _vitesseRotation = 1800f;
-    private Rigidbody _rb;
+    [SerializeField] private float _vitesseRotation = 4f;
 
-    void Start()
+    void FixedUpdate()
     {
-        _rb = GetComponent<Rigidbody>(); 
-    }
-
-    void Update()
-    {
-        _rb.angularVelocity = Vector3.up * _vitesseRotation * Time.deltaTime;
+        transform.Rotate(0f, _vitesseRotation, 0f);
     }
 }

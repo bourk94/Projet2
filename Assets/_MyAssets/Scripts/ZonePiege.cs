@@ -6,28 +6,33 @@ public class ZonePiege : MonoBehaviour
 {
     // Attributs
     private bool _estActive = false;
-    [SerializeField] private GameObject _piege = default;
+    //[SerializeField] private GameObject _piege = default;
+    [SerializeField] private List­<GameObject> _listePieges = new List<GameObject>();
     [SerializeField] private float _force;
-    private Rigidbody _rb;
+    private List<Rigidbody> _listeRb = new List<Rigidbody>();
+    //private Rigidbody _rb;
     
 
     private void Start()
     {
-        _rb = _piege.GetComponent<Rigidbody>();
-        _rb.useGravity = false;
+        foreach(var piege in _listePieges)
+        {
+            piege.GetComponent<Rigidbody>().useGravity = false;
+            _listeRb.Add(piege.GetComponent<Rigidbody>());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (_estActive && other.gameObject.tag == "Player") 
-            return;
+        if (!_estActive && other.gameObject.tag == "Player")
+        {
+            foreach (var rb in _listeRb)
+            {
+                rb.useGravity = true;
+                rb.AddForce(Vector3.back * _force);
+            }
 
-        _estActive = true;
-
-        if (!_estActive)
-            return;
-
-        _rb.useGravity = true;
-        _rb.AddForce(Vector3.back * _force);
+            _estActive = true;
+        }     
     }
 }
